@@ -58,11 +58,6 @@ fetch('images.json')
     .then((response) => response.json())
     .then((json) => handleImages(json));
 
-
-// var imageUrl = 'content/images/1q2sok3altaab1lcjnosar____466679377744514.jpg',
-// imageBounds = [[y,x], [y + width, x + width*quad_scalar]];
-// L.imageOverlay(imageUrl, imageBounds).addTo(map);
-
 /* Upon map movement, print the bounds to the console as a formatted string */
 map.on('moveend', () => {
     const bounds = getBounds();

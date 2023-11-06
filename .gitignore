@@ -2,15 +2,12 @@
 .vscode/
 __pycache__/
 cache/
-
 data/
 images/
 webpage/
-*.js
 notes_private.md
 old/
 pull_images.py
-temp.geojson
 tools.ipynb
 mapping.ipynb
 viz.*
