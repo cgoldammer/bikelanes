@@ -27,7 +27,7 @@ access_token_mapillary = os.environ['MAPILLARY_ACCESS_TOKEN']
 distance_max = 3.e-04
 folder_name = 'images'
 BORO_MANHATTAN = 1
-filename_routes = 'data/nyc_bikeroutes.geojson'
+filename_routes = 'docs/nyc_bikeroutes.geojson'
 
 def get_streets():
     df_streets_raw = gpd.read_file(filename_routes).to_crs(crs)
