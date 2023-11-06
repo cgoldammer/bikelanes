@@ -10,7 +10,7 @@ If you want to bike in NYC without imminient fear for your life, you'll use bike
 
 These are egregious cases, but what is the average experience along bike lanes? To find out, let's look at some pictures: Are they protected? Are there dangers on the road?
 
-You can also find the pictures [on a map, **warning: 40MB download!**](https://cgoldammer.github.io/bikelanes/map.html)
+You can also find the pictures [on a map, **warning: 20MB download!**](https://cgoldammer.github.io/bikelanes/map.html)
 
 If you're new to all this, here's some background:
 1. [The official NYC bike lane map](https://www.nyc.gov/html/dot/html/bicyclists/bikemaps.shtml)
