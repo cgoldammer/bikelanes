@@ -57,9 +57,7 @@ const clearImages = () => {
 var imageJson = [];
 
 const imagesAfterFilter = () => {
-    console.log("Filtering images")
-    console.log(imageJson)
-
+    
     if (imageJson.length == 0) {
         return [];
     }
@@ -70,27 +68,47 @@ const imagesAfterFilter = () => {
     const imagesSelected = imageJson.sort(() => Math.random() - Math.random()).slice(0, maxImages);
 
     /* Selected car is the value of the selected buttonCar */
-    let selectedCar = document.querySelector('.selected')
-    if (selectedCar == null) {
-        return imagesSelected;
+    const buttons = [
+        ['buttonCar', 'obstruct_car', 'boolean'],
+        ['buttonLane', 'lane_max', 'string']
+    ];
+
+    const getFilter = (buttonName, filterName, filterType) => {
+        let selectedButton = document.querySelector(`.${buttonName}.selected`);
+        if (selectedButton == null) {
+            return null;
+        }
+        let value = selectedButton.value;
+        if (value == 'all') {
+            return null;
+        }
+
+        if (filterType == 'boolean') {
+            return value == 'yes' ? true : false;
+        } else {
+            return value;
+        }
     }
-    selectedCar = selectedCar.value;
+
     
 
-    if (selectedCar == 'both') {
-        return imagesSelected;
-    }
-
-    const requiredValue = selectedCar == 'yes' ? true : false;
-    const filterName = 'obstruct_car';
-    const rowIsFiltered = (row) => {
-        if (row[filterName] != requiredValue) {
-            return false;
+    const filterList = buttons.map(button => getFilter(button[0], button[1], button[2]));
+    console
+    console.log(filterList)
+    /* Apply the filters to the images */
+    const filteredImages = imagesSelected.filter(image => {
+        for (let i = 0; i < filterList.length; i++) {
+            if (filterList[i] != null && image[buttons[i][1]] != filterList[i]) {
+                return false;
+            }
         }
         return true;
-    }
+    });
 
-    return imagesSelected.filter(rowIsFiltered);
+    console.log("Length after filtering: " + filteredImages.length)
+    console.log(filteredImages)
+
+    return filteredImages;
 }
 
 const updateDisplay = () => {
@@ -98,20 +116,20 @@ const updateDisplay = () => {
 }
 
 
-var filters = document.querySelectorAll('.buttonCar');
+var filters = document.querySelectorAll('.buttonFilter');
     // Add the onclick event to each filter
 filters.forEach(filter => {
     filter.onclick = () => {
-        console.log(filter)
+        
         value = filter.value; 
         
-        /* Set this button to selected and all other buttons to not selected */
-        filters.forEach(filter => {
-            if (filter.value == value) {
-                filter.classList.add('selected');
-            } else {
-                filter.classList.remove('selected');
+        /* Set this button to selected and all other buttons in the same class to not selected */
+        filter.classList.add('selected');
+        document.querySelectorAll(`.${filter.classList[1]}`).forEach(otherFilter => {
+            if (otherFilter != filter) {
+                otherFilter.classList.remove('selected');
             }
+
         });
 
         updateDisplay();

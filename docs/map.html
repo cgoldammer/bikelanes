@@ -18,12 +18,20 @@
 </head>
 <body>
     <div id="filters">
+        <div><p>Lane Type</p> </div>
+          <div class="button-group">
+            <button id="both" class="button buttonLane buttonFilter" value="all">All</button>
+            <button id="yes" class="button buttonLane buttonFilter" value="Standard">Standard</button>
+            <button id="yes" class="button buttonLane buttonFilter" value="Protected Path">Protected</button>
+            <button id="no" class="button buttonLane buttonFilter" value="Sharrows">Sharrow</button>
+          </div>
         <div><p>Obstructed by car</p> </div>
         <div class="button-group">
-            <button id="both" class="button buttonCar" value="both">Both</button>
-            <button id="yes" class="button buttonCar" value="yes">Yes</button>
-            <button id="no" class="button buttonCar" value="no">No</button>
+            <button id="both" class="button buttonCar buttonFilter" value="all">Both</button>
+            <button id="yes" class="button buttonCar buttonFilter" value="yes">Yes</button>
+            <button id="no" class="button buttonCar buttonFilter" value="no">No</button>
           </div>
+          
     </div>
     
 
