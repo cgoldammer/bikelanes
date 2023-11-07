@@ -9,14 +9,31 @@ p {
     font-size: 16px;
 }
 
+.flex-grid {
+    padding: 5px 10px;
+    display: flex;
+    min-width: 400px;
+    clear:both;
+}
+
+.col {
+    width: 30%;
+    padding: 5px 10px;
+}
+
+.col2 {
+    width: 70%;
+    clear:both;
+}
+
 .button-group {
     display: flex;
-    justify-content: center; /* Center the buttons horizontally */
-    gap: 10px; /* Add some space between buttons */
+    /* justify-content: center;  */
+    gap: 5px; /* Add some space between buttons */
   }
   
   .button {
-    padding: 10px 20px;
+    padding: 5px 10px;
     font-size: 12px;
     cursor: pointer;
     border: 1px solid #ddd; /* A light grey border for the buttons */
@@ -38,9 +55,8 @@ p {
     background-color: #ddd; /* Darker background color to indicate selection */
   }
 
-
-
 #filters {
+    
     background: white;
     position: absolute;
     top: 10px;

@@ -1,3 +1,5 @@
+const maxImages = 500;
+
 L_NO_TOUCH = false;
 L_DISABLE_3D = false;
 
@@ -62,7 +64,7 @@ const imagesAfterFilter = () => {
         return [];
     }
 
-    const maxImages = 500;
+
     
     // Take random sample of size maxImages
     const imagesSelected = imageJson.sort(() => Math.random() - Math.random()).slice(0, maxImages);
@@ -115,6 +117,14 @@ const updateDisplay = () => {
     displayImages(imagesAfterFilter());
 }
 
+/* Add an onclick event to the button with id
+buttonToggle to toggle visibility of the filterToToggle div */
+document.querySelector('#buttonToggle').onclick = () => {
+    // Get the current text from the button
+    const buttonText = document.querySelector('#buttonToggle').innerText;
+    document.querySelector('#buttonToggle').innerText = buttonText == "Show filters" ? "Hide filters" : "Show filters";
+    document.querySelector('#filterToToggle').classList.toggle('hidden');
+}
 
 var filters = document.querySelectorAll('.buttonFilter');
     // Add the onclick event to each filter
