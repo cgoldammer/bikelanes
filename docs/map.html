@@ -19,10 +19,15 @@
 <body>
     <div id="filters">
         <div id="filterToggle">
-            <button id="buttonToggle" class="button buttonToggle" value="all">Show filters</button>
+            <button id="buttonToggle" class="button buttonToggle" value="all"></button>
         </div>
         
         <div id="filterToToggle" >
+            <div class="flex-grid">
+                <span class="col"><span id="maxNumImages"></span></span>
+                <input class="col2" type="range" min="10" max="500" class="slider" id="myRange">
+            
+            </div>
             <div class="flex-grid">
                 <span class="col">Lane</span>
                 <div class="button-group col2">

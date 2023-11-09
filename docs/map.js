@@ -1,4 +1,4 @@
-const maxImages = 500;
+
 
 L_NO_TOUCH = false;
 L_DISABLE_3D = false;
@@ -25,11 +25,7 @@ const getBounds = () => {
     return res;
 }
 
-y = 40.75;
-x = -73.95;
-
-
-startLocation = [y,x];
+startLocation = [40.75,-73.95 ];
 
 var map = L.map('map').setView(startLocation, 13);
 
@@ -64,8 +60,6 @@ const imagesAfterFilter = () => {
         return [];
     }
 
-
-    
     // Take random sample of size maxImages
     const imagesSelected = imageJson.sort(() => Math.random() - Math.random()).slice(0, maxImages);
 
@@ -92,11 +86,8 @@ const imagesAfterFilter = () => {
         }
     }
 
-    
 
     const filterList = buttons.map(button => getFilter(button[0], button[1], button[2]));
-    console
-    console.log(filterList)
     /* Apply the filters to the images */
     const filteredImages = imagesSelected.filter(image => {
         for (let i = 0; i < filterList.length; i++) {
@@ -106,10 +97,6 @@ const imagesAfterFilter = () => {
         }
         return true;
     });
-
-    console.log("Length after filtering: " + filteredImages.length)
-    console.log(filteredImages)
-
     return filteredImages;
 }
 
@@ -117,17 +104,24 @@ const updateDisplay = () => {
     displayImages(imagesAfterFilter());
 }
 
+let showDetails = true;
+
+const toggleButton = document.querySelector('#buttonToggle');
+const updateDetailsText = () => {
+    toggleButton.innerText = showDetails ? "Hide details" : "Show details";
+    document.querySelector('#filterToToggle').hidden = !showDetails;
+}
+
+updateDetailsText();
+
 /* Add an onclick event to the button with id
 buttonToggle to toggle visibility of the filterToToggle div */
 document.querySelector('#buttonToggle').onclick = () => {
-    // Get the current text from the button
-    const buttonText = document.querySelector('#buttonToggle').innerText;
-    document.querySelector('#buttonToggle').innerText = buttonText == "Show filters" ? "Hide filters" : "Show filters";
-    document.querySelector('#filterToToggle').classList.toggle('hidden');
+    showDetails = !showDetails;
+    updateDetailsText();
 }
 
 var filters = document.querySelectorAll('.buttonFilter');
-    // Add the onclick event to each filter
 filters.forEach(filter => {
     filter.onclick = () => {
         
@@ -146,10 +140,30 @@ filters.forEach(filter => {
     }
 });
 
+let maxImages = 50;
+
+
+var slider = document.getElementById("myRange");
+slider.value = maxImages;
+var output = document.getElementById("maxNumImages");
+const updateHtml = () => {
+    output.innerHTML = "Max images: " + maxImages
+}
+updateHtml();
+
+// Update the current slider value (each time you drag the slider handle)
+slider.oninput = function() {
+    maxImages = this.value;
+    updateHtml();
+}
+
+slider.onchange = function() {
+    updateDisplay();
+}
+
 
 const displayImages = (json) => {
     clearImages();
-    console.log("Updating display with number of images: " + json.length)
     json.forEach(row => {
         addImage(row.s3_location, row.x, row.y, row.point_google);
     });
@@ -166,17 +180,6 @@ fetch('nyc_bikeroutes_small.geojson')
 .then((response) => response.json())
 .then((json) => L.geoJSON(json).addTo(map));
 
-
 fetch('images.json')
     .then((response) => response.json())
     .then((json) => storeImages(json));
-
-/* Upon map movement, print the bounds to the console as a formatted string */
-map.on('moveend', () => {
-    const bounds = getBounds();
-    // Print the bounds in a formatted string
-    console.log(`Map moved to [${bounds.southWest.lat}, ${bounds.southWest.lng}, ${bounds.northEast.lat}, ${bounds.northEast.lng}]`);
-    // Now print the zoom level and the length of each boundary in meters, rounded to two digits
-    console.log(`Zoom level: ${bounds.zoom}`);
-    console.log(`North boundary length: ${L.latLng(bounds.northEast.lat, bounds.northEast.lng).distanceTo(L.latLng(bounds.northEast.lat, bounds.southWest.lng)).toFixed(2)} meters`);
-});
