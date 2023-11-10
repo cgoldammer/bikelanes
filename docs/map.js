@@ -147,7 +147,7 @@ var slider = document.getElementById("myRange");
 slider.value = maxImages;
 var output = document.getElementById("maxNumImages");
 const updateHtml = () => {
-    output.innerHTML = "Max images: " + maxImages
+    output.innerHTML = "Images: " + maxImages
 }
 updateHtml();
 

@@ -10,19 +10,21 @@ p {
 }
 
 .flex-grid {
-    padding: 5px 10px;
+    padding: 5px 5px;
     display: flex;
-    min-width: 500px;
+    /* Fix width to 350 */
+    width: 300px;
     clear:both;
 }
 
 .col {
     width: 40%;
-    padding: 5px 10px;
+    padding: 0px 5px;
 }
 
 .col2 {
     width: 60%;
+    padding: 0px 5px;
     clear:both;
 }
 
@@ -33,7 +35,7 @@ p {
   }
   
   .button {
-    padding: 5px 10px;
+    padding: 5px 5px;
     font-size: 12px;
     cursor: pointer;
     border: 1px solid #ddd; /* A light grey border for the buttons */
@@ -81,6 +83,7 @@ p {
     left: 0;
     top: 0;
 }
+
 
 .leaflet-container {
     font-size: 1rem;
