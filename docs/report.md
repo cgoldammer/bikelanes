@@ -8,15 +8,24 @@ title: Overview of results
 
 If you want to bike in NYC without imminient fear for your life, you'll use bike lanes. To understand bike lanes, you have to see them. Maybe you know about cases like [cars driving on protected bike lanes](https://www.bicycling.com/news/a45459055/watch-this-cyclist-take-on-cars-in-the-bike-lane-in-nycand-win/) or [Queensboro bridge](https://www.amny.com/news/queensboro-bridge-bike-lane-delay/) that manages to make the bike lane so narrow that you can't fit two bike markings next to each other.
 
-These are egregious cases, but what is the average experience along bike lanes? To find out, let's look at some pictures: Are they protected? Are there dangers on the road?
-
-You can also find the pictures [on a map, **warning: 20MB download!**](https://cgoldammer.github.io/bikelanes/map.html)
-
 If you're new to all this, here's some background:
 1. [The official NYC bike lane map](https://www.nyc.gov/html/dot/html/bicyclists/bikemaps.shtml)
 2. [Types of bike lanes](https://nacto.org/publication/urban-bikeway-design-guide/bike-lanes/)
 
-My results are tentative, and I will learn more and update them. Thus, some important caveats:
+These are egregious cases, but what is the average experience along bike lanes? To find out, let's look at some pictures: Are they protected? Are there dangers on the road? You can also find the pictures [on a map. **Warning: 20MB download**!](https://cgoldammer.github.io/bikelanes/map.html)
+
+As of 2023, NYC has 994 miles of bike lanes, with strong difference by borough, e.g. protected paths are  most prominent in Manhattan:
+
+| borough       |   None |   Sharrows |   Standard |   Protected Path |   Greenway |
+|:--------------|-------:|-----------:|-----------:|-----------------:|-----------:|
+| Bronx         |     17 |         15 |         66 |               14 |         32 |
+| Brooklyn      |     36 |         40 |        147 |               30 |         41 |
+| Manhattan     |     28 |         22 |         58 |               67 |         51 |
+| Queens        |     38 |         43 |        100 |               39 |         28 |
+| Staten_Island |     22 |         12 |         16 |                2 |         19 |
+
+
+Let's take these lanes and look at pictures of them along the way, I am aiming for one picture every 218 yards (aka 200m). Let's call this a "spot". So far, the data includes 727 coded spots, and one can think of this as covering around 9% of all spots in the city. Results are tentative, thus I have some  caveats:
 
 1. I'm only covering a small share of bike lanes
 2. Some images are outdated, and that can mean that I miss improvements that have happened since then
@@ -24,7 +33,7 @@ My results are tentative, and I will learn more and update them. Thus, some impo
 4. I'm not a planning or transportation researcher, I have read very little relevant research, so please don't take my personal read of this data as policy guidance. If I do make mistakes or wrong suggestions, tell me so. I'll read and learn. 
 5. Some images are mis-coded, and I'm working on validating everything.
 
-What am I taking away from looking at more than 3,000 images so far?
+What am I taking away?
 
 1. Parking protected lanes are quite good!
 2. Sharrows are sad!

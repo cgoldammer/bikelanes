@@ -27,7 +27,20 @@ access_token_mapillary = os.environ['MAPILLARY_ACCESS_TOKEN']
 distance_max = 3.e-04
 folder_name = 'images'
 BORO_MANHATTAN = 1
-filename_routes = 'docs/nyc_bikeroutes.geojson'
+filename_routes = 'data/nyc_bikeroutes.geojson'
+
+lanes_dict = {
+    0: 'None',
+    1: 'Sharrows',
+    2: 'Standard',
+    3: 'Protected Path',
+    4: 'Greenway'
+}
+
+# Invert the dictionary
+lanes_dict_inv = {v:k for k,v in lanes_dict.items()}
+cols_lanes = ['tf', 'ft']
+
 
 def get_streets():
     df_streets_raw = gpd.read_file(filename_routes).to_crs(crs)
@@ -36,7 +49,27 @@ def get_streets():
         'ft_facilit': 'ft',
         'tf_facilit': 'tf'
     }
-    return df_streets_raw.rename(columns=renamer)
+
+    df_streets = df_streets_raw.rename(columns=renamer)
+
+
+    # Fill the lanes with the values from lanes_dict_inv
+    # Any value not in that dict will be coded as 0
+    for c in cols_lanes:
+        col = df_streets[c].copy()
+        col = [lanes_dict_inv.get(v, 0) for v in col]
+        df_streets[c + '_int'] = col
+
+        # Any value from the initial column that is not in the lanes_dict_inv will be coded as 0
+        
+    df_streets['lane_max'] = df_streets[[c + '_int' for c in cols_lanes]].apply('max', axis=1)
+    df_streets['lane_max'] = df_streets['lane_max'].replace(lanes_dict)
+
+    df_streets['length_km'] = df_streets.geometry.length / 1000
+    df_streets['length_miles'] = df_streets.length_km * 0.621371
+    df_streets['borough'] = df_streets.boro.astype(int).replace({v:k for k,v in nyc_boros.items()})
+
+    return df_streets
 
 
 def format_float(f):
@@ -563,3 +596,11 @@ cols_export_code = [
     'tf',
     'ft',
     'ds']
+
+nyc_boros = {
+    'Manhattan': 1,
+    'Brooklyn': 3,
+    'Queens': 4,
+    'Bronx': 2,
+    'Staten_Island': 5
+}
