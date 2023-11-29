@@ -604,3 +604,53 @@ nyc_boros = {
     'Bronx': 2,
     'Staten_Island': 5
 }
+
+def get_df_coded():
+    df_coded = pd.read_csv('data/bike_coding_sheet_download.csv')
+    df_coded = df_coded[df_coded.id.notnull()].copy()
+    df_coded.id = df_coded.id.astype(int)
+    df_coded.columns = [c.replace(' ', '_').replace('?', '') for c in df_coded.columns]
+
+    cols_protected = ['through_parking', 'plastic_stoppers', 'white_separation', 'stone']
+    obstructions = ['construction', 'cars_standing', 'cars_moving', 'humans']
+    cols_lanes = ['sharrow', 'bike_lane', 'parkway']
+    cols = obstructions + cols_protected + obstructions + ['useful'] + cols_lanes
+
+    bad_vals = ['?', '´']
+    # Remove bad_vals for all cols in double loop
+    for c in cols:
+        for bad_val in bad_vals:
+            df_coded[c] = df_coded[c].astype(str).str.replace(bad_val, '0')
+
+    for c in cols:
+        df_coded[c] = df_coded[c].fillna('0').astype(float).fillna(0).astype(int).astype(bool)
+
+    ids_useful = list(df_coded.query('useful').id.unique())
+
+    df_coded['neither'] = ~df_coded[cols_protected].apply(max, axis=1).astype(bool)
+
+    lanes_dict = {
+        0: 'None',
+        1: 'Sharrows',
+        2: 'Standard',
+        3: 'Protected Path',
+        4: 'Greenway'
+    }
+
+    # Invert the dictionary
+    lanes_dict_inv = {v:k for k,v in lanes_dict.items()}
+    cols_lanes = ['tf_facilit', 'ft_facilit']
+
+    # Fill the lanes with the values from lanes_dict_inv
+    # Any value not in that dict will be coded as 0
+    for c in cols_lanes:
+        col = df_coded[c].copy()
+        col = [lanes_dict_inv.get(v, 0) for v in col]
+        df_coded[c + '_int'] = col
+
+        # Any value from the initial column that is not in the lanes_dict_inv will be coded as 0
+        
+    df_coded['lane_max'] = df_coded[[c + '_int' for c in cols_lanes]].apply('max', axis=1)
+    df_coded['lane_max'] = df_coded['lane_max'].replace(lanes_dict)
+    
+    return df_coded
