@@ -3,7 +3,6 @@ layout: default
 title: Overview of results
 ---
 
-
 # Overview
 
 If you want to bike in NYC without imminient fear for your life, you'll use bike lanes. To understand bike lanes, you have to see them. Maybe you know about cases like [cars driving on protected bike lanes](https://www.bicycling.com/news/a45459055/watch-this-cyclist-take-on-cars-in-the-bike-lane-in-nycand-win/) or [Queensboro bridge](https://www.amny.com/news/queensboro-bridge-bike-lane-delay/) that manages to make the bike lane so narrow that you can't fit two bike markings next to each other.
@@ -43,9 +42,9 @@ It's easy to complain, and I will do plenty of that. But I also want to highligh
 
 Coming up as I work on this:
 1. How good is this lane: How likely am I to have no obstacles?
-2. All pictures on a map
-3. Why are there so many moving trucks in Brooklyn?
-4. I think the official city map is mis-coded in bulk? I'm validating.
+2. Why are there so many moving trucks in Brooklyn?
+3. I think the official city map is mis-coded in bulk? I'm validating.
+4. AI? "Can't we use AI" you might ask, and automate all this? Some [first experiments](https://github.com/cgoldammer/bikelanes/blob/master/clip_run.ipynb) aren't performing well, so I got to see how to improve those models.
 
 # Parking protected lanes are quite good!
 
