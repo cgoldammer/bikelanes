@@ -605,16 +605,20 @@ nyc_boros = {
     'Staten_Island': 5
 }
 
+cols_protected = ['through_parking', 'plastic_stoppers', 'white_separation', 'stone']
+obstructions = ['construction', 'cars_standing', 'cars_moving', 'humans']
+cols_lane_names = ['sharrow', 'bike_lane', 'parkway']
+cols_classified = ['sharrow', 'unprotected', 'partially_protected', 'protected']
+
 def get_df_coded():
     df_coded = pd.read_csv('data/bike_coding_sheet_download.csv')
     df_coded = df_coded[df_coded.id.notnull()].copy()
     df_coded.id = df_coded.id.astype(int)
     df_coded.columns = [c.replace(' ', '_').replace('?', '') for c in df_coded.columns]
 
-    cols_protected = ['through_parking', 'plastic_stoppers', 'white_separation', 'stone']
-    obstructions = ['construction', 'cars_standing', 'cars_moving', 'humans']
-    cols_lanes = ['sharrow', 'bike_lane', 'parkway']
-    cols = obstructions + cols_protected + obstructions + ['useful'] + cols_lanes
+    
+    
+    cols = obstructions + cols_protected + obstructions + ['useful'] + cols_lane_names
 
     bad_vals = ['?', '´']
     # Remove bad_vals for all cols in double loop
@@ -650,7 +654,14 @@ def get_df_coded():
 
         # Any value from the initial column that is not in the lanes_dict_inv will be coded as 0
         
-    df_coded['lane_max'] = df_coded[[c + '_int' for c in cols_lanes]].apply('max', axis=1)
-    df_coded['lane_max'] = df_coded['lane_max'].replace(lanes_dict)
+    df_coded['lane_max_int'] = df_coded[[c + '_int' for c in cols_lanes]].apply('max', axis=1)
+    df_coded['lane_max'] = df_coded['lane_max_int'].replace(lanes_dict)
     
+    df_coded['protected'] = df_coded.through_parking | df_coded.stone
+    df_coded['partially_protected'] = ~df_coded.protected & (df_coded.white_separation | df_coded.plastic_stoppers)
+    df_coded['sharrow'] = df_coded.sharrow & ~(df_coded.protected | df_coded.partially_protected)
+    df_coded['unprotected'] = df_coded.bike_lane & ~(df_coded.protected | df_coded.partially_protected)
+
+    df_coded['classified'] = df_coded[cols_classified].sum(axis=1) == 1
+        
     return df_coded
