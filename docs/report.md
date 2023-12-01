@@ -11,7 +11,9 @@ If you're new to all this, here's some background:
 1. [The official NYC bike lane map](https://www.nyc.gov/html/dot/html/bicyclists/bikemaps.shtml)
 2. [Types of bike lanes](https://nacto.org/publication/urban-bikeway-design-guide/bike-lanes/)
 
-These are egregious cases, but what is the average experience along bike lanes? To find out, let's look at some pictures: Are they protected? Are there dangers on the road? You can also find the pictures [on a map. **Warning: 20MB download**!](https://cgoldammer.github.io/bikelanes/map.html)
+What is the *average* experience along bike lanes? To find out, let's look at some pictures: Are they protected? Are there dangers on the road? You can also find the pictures [on a map. **Warning: 20MB download**!](https://cgoldammer.github.io/bikelanes/map.html).
+
+For a quick summary (see [data](https://github.com/cgoldammer/bikelanes/blob/master/analysis.ipynb)) on my sample of about 800 images of bike lanes: Obstructions tend to be low for bike lanes that are protected (either through stone or parking). For standard bike lanes, obstructions are much more common, with an 11% chance (per block) of being obstructed by a standing car and an 8% of being blocked by a moving car. And the  notorious sharrows show the expected pattern with a 23% of being blocked by a moving car. 
 
 As of 2023, NYC has 994 miles of bike lanes, with strong difference by borough, e.g. protected paths are  most prominent in Manhattan:
 
@@ -23,8 +25,7 @@ As of 2023, NYC has 994 miles of bike lanes, with strong difference by borough, 
 | Queens        |     38 |         43 |        100 |               39 |         28 |
 | Staten_Island |     22 |         12 |         16 |                2 |         19 |
 
-
-Let's take these lanes and look at pictures of them along the way, I am aiming for one picture every 218 yards (aka 200m). Let's call this a "spot". So far, the data includes 727 coded spots, and one can think of this as covering around 9% of all spots in the city. Results are tentative, thus I have some  caveats:
+Let's take these lanes and look at pictures of them along the way, I am aiming for one picture every 218 yards (aka 200m). Let's call this a "spot". So far, the data includes 727 coded spots, and one can think of this as covering around 9% of all spots in the city. Results are tentative, thus I have some caveats:
 
 1. I'm only covering a small share of bike lanes
 2. Some images are outdated, and that can mean that I miss improvements that have happened since then
@@ -38,13 +39,13 @@ What am I taking away?
 2. Sharrows are sad!
 3. Protected isn't protected
 
-It's easy to complain, and I will do plenty of that. But I also want to highlight that bike lanes have dramatically improved. Very often, the images I work with are outdated, and the infrastructure has since been improved.
+It's easy to complain, and I will do plenty of that. But I also want to highlight that bike lanes have dramatically improved. Very often, the images I work with are outdated, and the infrastructure has since been improved
+
 
 Coming up as I work on this:
-1. How good is this lane: How likely am I to have no obstacles?
-2. Why are there so many moving trucks in Brooklyn?
-3. I think the official city map is mis-coded in bulk? I'm validating.
-4. AI? "Can't we use AI" you might ask, and automate all this? Some [first experiments](https://github.com/cgoldammer/bikelanes/blob/master/clip_run.ipynb) aren't performing well, so I got to see how to improve those models.
+1. Why are there so many moving trucks in Brooklyn?
+2. I think the official city map is mis-coded in bulk? I'm validating.
+3. AI? "Can't we use AI" you might ask, and automate all this? Some [first experiments](https://github.com/cgoldammer/bikelanes/blob/master/clip_run.ipynb) aren't performing well, so I got to see how to improve those models.
 
 # Parking protected lanes are quite good!
 
